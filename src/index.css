@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-ink;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-paper focus-visible:ring-2;
+  }
+
+  .nav-link {
+    @apply text-sm font-light tracking-widest uppercase text-ink/80 transition-colors duration-reveal ease-reveal hover:text-ink focus-ring;
+  }
+
+  .section-padding {
+    @apply px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  .page-heading {
+    @apply font-serif text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl;
+  }
+
+  .masonry-columns {
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 375px) {
+    .masonry-columns {
+      columns: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .masonry-columns {
+      columns: 2;
+      column-gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-columns {
+      columns: 3;
+      column-gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .masonry-columns {
+      columns: 4;
+      column-gap: 1.75rem;
+    }
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-item {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-item {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
