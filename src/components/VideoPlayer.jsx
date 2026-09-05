@@ -15,12 +15,16 @@ export default function VideoPlayer({ src, poster, alt = 'Video content' }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [showControls, setShowControls] = useState(true);
 
-  const togglePlay = useCallback(() => {
+  const togglePlay = useCallback(async () => {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
-      video.play();
-      setIsPlaying(true);
+      try {
+        await video.play();
+        setIsPlaying(true);
+      } catch {
+        setIsPlaying(false);
+      }
     } else {
       video.pause();
       setIsPlaying(false);
@@ -42,9 +46,10 @@ export default function VideoPlayer({ src, poster, alt = 'Video content' }) {
   const handleSeek = (e) => {
     const video = videoRef.current;
     if (!video) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    video.currentTime = percent * video.duration;
+    const time = Number(e.target.value);
+    video.currentTime = time;
+    setCurrentTime(time);
+    setProgress((time / video.duration) * 100 || 0);
   };
 
   const handleKeyDown = (e) => {
@@ -56,13 +61,13 @@ export default function VideoPlayer({ src, poster, alt = 'Video content' }) {
 
   useEffect(() => {
     let timer;
-    if (isPlaying) {
-      timer = setTimeout(() => setShowControls(false), 3000);
-    } else {
+    if (!isPlaying) {
       setShowControls(true);
+    } else if (showControls) {
+      timer = setTimeout(() => setShowControls(false), 3000);
     }
     return () => clearTimeout(timer);
-  }, [isPlaying]);
+  }, [isPlaying, showControls]);
 
   return (
     <div
@@ -111,17 +116,16 @@ export default function VideoPlayer({ src, poster, alt = 'Video content' }) {
           </button>
 
           <div className="flex flex-1 flex-col gap-1">
-            <button
-              type="button"
-              onClick={handleSeek}
-              className="relative h-1 w-full cursor-pointer bg-paper/30 focus-ring"
+            <input
+              type="range"
+              min="0"
+              max={duration || 0}
+              step="0.1"
+              value={currentTime}
+              onChange={handleSeek}
+              className="h-1 w-full cursor-pointer accent-accent focus-ring"
               aria-label="Seek video"
-            >
-              <span
-                className="absolute inset-y-0 left-0 bg-accent"
-                style={{ width: `${progress}%` }}
-              />
-            </button>
+            />
             <div className="flex justify-between text-xs text-paper/70">
               <span>{formatTime(currentTime)}</span>
               <span>{formatTime(duration)}</span>

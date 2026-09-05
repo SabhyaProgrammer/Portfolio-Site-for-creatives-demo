@@ -20,12 +20,16 @@ export default function AudioPlayer({ src, title = 'Audio track' }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const togglePlay = useCallback(() => {
+  const togglePlay = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
-      audio.play();
-      setIsPlaying(true);
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch {
+        setIsPlaying(false);
+      }
     } else {
       audio.pause();
       setIsPlaying(false);
@@ -47,9 +51,10 @@ export default function AudioPlayer({ src, title = 'Audio track' }) {
   const handleSeek = (e) => {
     const audio = audioRef.current;
     if (!audio) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = percent * audio.duration;
+    const time = Number(e.target.value);
+    audio.currentTime = time;
+    setCurrentTime(time);
+    setProgress((time / audio.duration) * 100 || 0);
   };
 
   useEffect(() => {
@@ -108,17 +113,16 @@ export default function AudioPlayer({ src, title = 'Audio track' }) {
         </button>
 
         <div className="flex flex-1 flex-col gap-1">
-          <button
-            type="button"
-            onClick={handleSeek}
-            className="relative h-1.5 w-full cursor-pointer bg-mist/30 focus-ring"
+          <input
+            type="range"
+            min="0"
+            max={duration || 0}
+            step="0.1"
+            value={currentTime}
+            onChange={handleSeek}
+            className="h-1.5 w-full cursor-pointer accent-accent focus-ring"
             aria-label="Seek audio"
-          >
-            <span
-              className="absolute inset-y-0 left-0 bg-accent"
-              style={{ width: `${progress}%` }}
-            />
-          </button>
+          />
           <div className="flex justify-between text-xs text-mist">
             <span aria-live="polite">{formatTime(currentTime)}</span>
             <span>{formatTime(duration)}</span>
