@@ -5,7 +5,7 @@ export default function Footer() {
   const { contact, social } = aboutData;
 
   return (
-    <footer className="border-t border-ink/10 bg-paper section-padding py-12 md:py-16">
+    <footer className="border-t border-ink/10 bg-paper/80 backdrop-blur-md section-padding py-12 md:py-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-serif text-2xl text-ink md:text-3xl">Mara Voss</p>

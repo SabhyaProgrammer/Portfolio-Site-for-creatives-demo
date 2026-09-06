@@ -24,7 +24,7 @@ export default function HomeHero() {
         alt={heroImage.alt}
         className="h-full w-full object-cover"
         onLoad={() => setLoaded(true)}
-        fetchPriority="high"
+        fetchpriority="high"
       />
       <div
         className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent"
@@ -33,20 +33,20 @@ export default function HomeHero() {
 
       <div className="absolute inset-0 flex flex-col justify-end section-padding pb-16 md:pb-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: [0, 0, 0.2, 1], delay: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="max-w-2xl"
         >
-          <h1 className="font-serif text-4xl font-medium leading-tight text-paper sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-serif text-5xl font-medium leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
             Mara Voss
           </h1>
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-paper/90 sm:text-lg">
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/90 sm:text-xl">
             {aboutData.heroStatement}
           </p>
           <Link
             to="/work"
-            className="mt-8 inline-flex items-center gap-2 border border-paper/40 px-6 py-3 text-sm uppercase tracking-widest text-paper transition-colors duration-reveal hover:border-paper hover:bg-paper/10 focus-ring"
+            className="mt-10 btn-primary !text-white hover:!text-ink"
           >
             View work
             <span aria-hidden="true">→</span>

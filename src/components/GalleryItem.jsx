@@ -1,26 +1,30 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 
-export default function GalleryItem({ item, onOpen }) {
+const transition = { duration: 0.6, ease: [0.22, 1, 0.36, 1] };
+
+export default forwardRef(function GalleryItem({ item, onOpen }, ref) {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <motion.article
+      ref={ref}
       layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4, ease: [0, 0, 0.2, 1] }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      exit={{ opacity: 0 }}
+      transition={transition}
       className="masonry-item"
     >
       <button
         type="button"
         onClick={() => onOpen(item)}
-        className="group relative w-full overflow-hidden bg-mist/20 text-left focus-ring"
+        className="group relative w-full overflow-hidden bg-stone-100 text-left focus-ring"
         aria-label={`Open ${item.projectTitle}: ${item.alt}`}
       >
         <div
-          className={`absolute inset-0 bg-mist/30 transition-opacity duration-500 ${
+          className={`absolute inset-0 bg-stone-200 transition-opacity duration-700 ${
             loaded ? 'opacity-0' : 'opacity-100'
           }`}
           aria-hidden="true"
@@ -30,14 +34,16 @@ export default function GalleryItem({ item, onOpen }) {
           alt={item.alt}
           loading="lazy"
           onLoad={() => setLoaded(true)}
-          className="w-full object-cover transition-transform duration-reveal ease-reveal group-hover:scale-[1.03]"
+          className="w-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
           style={{ aspectRatio: item.aspectRatio || 1 }}
         />
-        <div className="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/80 to-transparent p-4 transition-transform duration-reveal group-hover:translate-y-0 group-focus-visible:translate-y-0">
-          <p className="text-xs uppercase tracking-widest text-paper/70">{item.category}</p>
-          <p className="font-serif text-base text-paper">{item.projectTitle}</p>
+        <div className="absolute inset-0 flex flex-col justify-end bg-black/0 p-6 transition-colors duration-500 group-hover:bg-black/20 group-focus-visible:bg-black/20">
+          <div className="translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+            <p className="text-xs font-medium uppercase tracking-widest text-white/90">{item.category}</p>
+            <p className="mt-1 font-serif text-lg text-white">{item.projectTitle}</p>
+          </div>
         </div>
       </button>
     </motion.article>
   );
-}
+});

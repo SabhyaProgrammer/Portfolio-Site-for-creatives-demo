@@ -24,7 +24,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50 bg-paper/80 backdrop-blur-md">
       <nav
         className="section-padding flex items-center justify-between py-5 md:py-6"
         aria-label="Main navigation"
@@ -43,7 +43,7 @@ export default function Navbar() {
               <NavLink
                 to={to}
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'text-accent' : ''}`
+                  `nav-link btn-hover ${isActive ? 'text-accent' : ''}`
                 }
               >
                 {label}

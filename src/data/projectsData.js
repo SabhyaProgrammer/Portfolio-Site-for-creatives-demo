@@ -25,37 +25,37 @@ export const projects = [
     description:
       'A series of street-adjacent portraits made during early-morning walks through Portland\'s industrial districts. Each subject was photographed within a single city block — no studio, no crew, just available light bouncing off corrugated steel and wet pavement.',
     heroImage: {
-      src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1600&q=80',
-      alt: 'Close portrait of a woman with freckles in soft overcast light against a blurred urban backdrop',
+      src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1600&q=80',
+      alt: 'Close portrait of a woman with freckles in soft overcast light',
     },
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80',
+        src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80',
         alt: 'Close portrait of a woman with freckles in soft overcast light',
         aspectRatio: 0.75,
         caption: 'Morning, Pearl District',
       },
       {
-        src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
-        alt: 'Portrait of a man in a dark coat looking slightly off-camera',
+        src: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=800&q=80',
+        alt: 'Portrait of a woman with soft lighting',
         aspectRatio: 0.8,
         caption: 'Industrial Ave.',
       },
       {
-        src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80',
-        alt: 'Portrait of a woman with curly hair and warm side lighting',
+        src: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fd453?w=800&q=80',
+        alt: 'Portrait of a woman with curly hair',
         aspectRatio: 0.67,
         caption: 'Freeway underpass',
       },
       {
-        src: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80',
-        alt: 'Black and white portrait of a man with strong jawline and direct gaze',
+        src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+        alt: 'Portrait of a man',
         aspectRatio: 1.2,
         caption: 'Converted to mono in post',
       },
       {
-        src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80',
-        alt: 'Portrait of a woman laughing with eyes closed in golden hour light',
+        src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80',
+        alt: 'Portrait of a woman laughing',
         aspectRatio: 0.75,
         caption: 'Last light, Division St.',
       },
